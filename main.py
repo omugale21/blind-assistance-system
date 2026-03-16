@@ -3,13 +3,16 @@ from ultralytics import YOLO
 from voice import speak
 from webcam_stream import WebcamStream
 import threading
+import time
 
 model = YOLO("yolov8n.pt")
 
-# start threaded webcam
 cap = WebcamStream(src=0).start()
 
-spoken = set()
+last_spoken_time = 0
+cooldown = 3
+
+dangerous_objects = ["person","chair","table","car","bicycle","motorcycle"]
 
 def estimate_distance(box_width):
 
@@ -33,6 +36,10 @@ while True:
 
     frame_width = frame.shape[1]
 
+    left_blocked = False
+    center_blocked = False
+    right_blocked = False
+
     results = model(frame, stream=True)
 
     for r in results:
@@ -50,30 +57,46 @@ while True:
             distance = estimate_distance(box_width)
 
             if center_x < frame_width/3:
-                position="left"
+                zone="left"
+                left_blocked = True
             elif center_x > frame_width*2/3:
-                position="right"
+                zone="right"
+                right_blocked = True
             else:
-                position="ahead"
-
-            message=f"{label} {position} {distance}"
-
-            if label in ["person","chair","table","car"] and distance=="very close":
-                message=f"Warning {label} very close"
+                zone="center"
+                center_blocked = True
 
             cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),2)
 
             cv2.putText(frame,
-                        message,
+                        f"{label} {zone} {distance}",
                         (x1,y1-10),
                         cv2.FONT_HERSHEY_SIMPLEX,
-                        0.7,
+                        0.6,
                         (0,255,0),
                         2)
 
-            if message not in spoken:
-                threading.Thread(target=speak,args=(message,)).start()
-                spoken.add(message)
+    navigation_message = None
+
+    if center_blocked:
+
+        if not left_blocked:
+            navigation_message = "Obstacle ahead. Safe path on the left"
+
+        elif not right_blocked:
+            navigation_message = "Obstacle ahead. Safe path on the right"
+
+        else:
+            navigation_message = "Multiple obstacles ahead. Stop"
+
+    current_time = time.time()
+
+    if navigation_message and current_time-last_spoken_time > cooldown:
+
+        threading.Thread(target=speak,args=(navigation_message,)).start()
+
+        last_spoken_time = current_time
+
 
     cv2.imshow("Blind Assistance System",frame)
 
