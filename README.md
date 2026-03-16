@@ -54,6 +54,7 @@ The system detects objects in real time using a webcam and provides spoken guida
 - Distance estimation based on object size
 - Obstacle warning system
 - Webcam-based environment awareness
+- Threaded webcam streaming for smoother real-time detection
 
 ## How It Works
 
@@ -82,6 +83,7 @@ blind-assistance-system
 │
 ├── main.py
 ├── voice.py
+├── webcam_stream.py
 ├── requirements.txt
 ├── README.md
 └── .gitignore
