@@ -1,84 +1,63 @@
-# Real-Time Object Detection and Voice Assistance for Blind People
+# 🧑‍🦯 Real-Time Object Detection and Voice Assistance for Blind People
 
+This project is an AI-based assistive system designed to help visually impaired individuals navigate their surroundings using computer vision and voice feedback.
 
-This project helps visually impaired individuals by detecting objects in real-time and providing voice feedback.
+The system uses **YOLOv8** for real-time object detection and provides intelligent guidance such as object position (left/right/ahead), distance estimation, and obstacle warnings.
 
-The system uses YOLOv8 for object detection and Text-to-Speech to announce detected objects.
+---
 
-## Features
+## 🚀 Live Demo
 
-- Real-time object detection
-- Voice feedback for detected objects
-- Assistive navigation support
-- Webcam based detection
+🔗 Try the deployed application here:
+https://huggingface.co/spaces/omugale/blind-assistance-system
 
-## Technologies Used
+> **Note:** The live demo focuses on visual object detection. Voice assistance and real-time navigation features are available in the local system due to browser limitations.
 
-Python  
-OpenCV  
-YOLOv8  
-pyttsx3  
+---
 
-## Installation
+## ✨ Features
 
-Clone the repository
+* Real-time object detection using YOLOv8
+* Voice feedback using Text-to-Speech
+* Left / Right / Ahead object guidance
+* Distance estimation based on object size
+* Obstacle warning system
+* Webcam-based environment awareness
+* Threaded webcam streaming for smoother performance
 
-git clone https://github.com/omugale21/blind-assistance-system.git
+---
 
-cd blind-assistance-system
+## 🧠 How It Works
 
-Install dependencies
+1. Webcam captures live video frames
+2. YOLOv8 detects objects in each frame
+3. System determines object position (left, right, ahead)
+4. Distance is estimated using bounding box size
+5. Voice feedback informs the user about surroundings
 
-pip install -r requirements.txt
+### 🔊 Example Output
 
-Run the project
-
-python main.py
-
-## Future Improvements
-
-- Mobile camera support
-- Distance estimation
-- Obstacle warning system
-- Smart navigation guidance
-=======
-This project is an assistive AI system designed to help visually impaired individuals navigate their surroundings using computer vision and voice feedback.
-
-The system detects objects in real time using a webcam and provides spoken guidance about the object's position (left, right, or ahead) and approximate distance. It also alerts the user when an obstacle is very close.
-
-## Features
-
-- Real-time object detection using YOLOv8
-- Voice feedback using Text-to-Speech
-- Left / Right / Ahead object guidance
-- Distance estimation based on object size
-- Obstacle warning system
-- Webcam-based environment awareness
-- Threaded webcam streaming for smoother real-time detection
-
-## How It Works
-
-1. The webcam captures live video frames.
-2. YOLOv8 detects objects in the frame.
-3. The system calculates the object's position (left, right, or ahead).
-4. Distance is estimated using the bounding box size.
-5. The system provides voice feedback to inform the user about nearby objects.
-
-Example voice output:
-
+```
 chair left near  
 bottle right far  
 warning person very close
+```
 
-## Technologies Used
+---
 
-- Python
-- OpenCV
-- YOLOv8 (Ultralytics)
-- pyttsx3 (Text-to-Speech)
-- NumPy
+## 🛠️ Technologies Used
 
-## Project Structure
+* Python
+* OpenCV
+* YOLOv8 (Ultralytics)
+* pyttsx3 (Text-to-Speech)
+* NumPy
+
+---
+
+## 📦 Project Structure
+
+```
 blind-assistance-system
 │
 ├── main.py
@@ -89,4 +68,43 @@ blind-assistance-system
 ├── requirements-local.txt
 ├── README.md
 └── .gitignore
+```
 
+---
+
+## ⚙️ Setup Instructions
+
+### 🔹 For Local System (Full Features)
+
+Includes webcam, voice assistance, and navigation:
+
+```
+pip install -r requirements-local.txt
+python main.py
+```
+
+---
+
+### 🔹 For Deployment (Web Demo)
+
+Used for Hugging Face deployment:
+
+```
+pip install -r requirements.txt
+python app.py
+```
+
+---
+
+## 🔮 Future Improvements
+
+* Mobile camera integration
+* Advanced distance estimation (depth-based)
+* Smart navigation path visualization
+* Edge device deployment (Raspberry Pi / Jetson)
+
+---
+
+## ⭐ If you like this project
+
+Give it a ⭐ on GitHub and share it!
