@@ -1,5 +1,4 @@
 ultralytics
-opencv-python
-pyttsx3
+opencv-python-headless
 numpy
-streamlit
+gradio
