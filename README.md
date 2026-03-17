@@ -1,6 +1,6 @@
 # Real-Time Object Detection and Voice Assistance for Blind People
 
-<<<<<<< HEAD
+
 This project helps visually impaired individuals by detecting objects in real-time and providing voice feedback.
 
 The system uses YOLOv8 for object detection and Text-to-Speech to announce detected objects.
@@ -84,7 +84,9 @@ blind-assistance-system
 ├── main.py
 ├── voice.py
 ├── webcam_stream.py
+├── app.py
 ├── requirements.txt
+├── requirements-local.txt
 ├── README.md
 └── .gitignore
->>>>>>> f5240bac4b0ff2e254aaa7c30d6f20ce84e36906
+
